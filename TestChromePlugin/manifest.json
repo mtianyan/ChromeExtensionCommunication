@@ -1,0 +1,39 @@
+{
+ "manifest_version": 2,
+
+
+"name": "Img",
+"version": "1.0",
+
+"browser_action": {
+"default_icon":"clock.png",
+"default_popup":"popup.html"
+},
+
+"permissions": [
+"activeTab", "tabs", "<all_urls>", "http://*/*",
+"https://*/*",
+"https://www.google.com/*",
+"http://www.google.com/*",
+"storage",
+"cookies"
+],
+"background": {
+"scripts": ["background.js"],
+    "persistent": true
+
+},
+"externally_connectable": {
+"matches": ["http://127.0.0.1:8011/", "*://localhost/*"]
+},
+
+ "content_scripts": [
+{
+  "matches": ["*://*/*"],
+  "js": ["content_script.js"],
+  "run_at": "document_end"
+
+}
+]
+
+}

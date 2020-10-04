@@ -1,0 +1,39 @@
+<html>
+<body>
+  <button class="cookie"> oschina </button>
+  <button class="cookie"> jianshu </button>
+</body>
+
+  <script type="text/javascript">
+  	var userSelection = document.getElementsByClassName("cookie")
+  	for(let i = 0; i < userSelection.length; i++) {
+  userSelection[i].addEventListener("click", function(event) {
+    console.log("Clicked index: " + i);
+    console.log(userSelection[i].innerText)
+    window.postMessage({ type: "GET_ONE_COOKIE", value: userSelection[i].innerText}, "*");
+  })
+}
+  	window.postMessage({ type: "GET_VERSION"}, "*");
+
+  	window.addEventListener("message", function(event){
+  		if(event.data.type==="Give_Your_Version"){
+  			var div = document.createElement("div");
+  			div.id = "version"
+  			div.innerText = "Version:" + event.data.value
+  			console.log("install version"+event.data.value)
+  			document.body.appendChild(div)
+  		}else if(event.data.type ==="Give_Your_ONE_COOKIE"){
+  			var div2 = document.createElement("div");
+  			div2.innerText = 
+JSON.stringify(event.data.value)
+  			document.body.appendChild(div2)
+  		}
+  	}, false);
+  	const aNode = document.getElementById('version');
+  	if(!aNode){
+  		console.log("Not install")
+  	}
+  </script>
+  
+
+</html>
